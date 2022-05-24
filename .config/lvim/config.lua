@@ -87,7 +87,24 @@ lvim.builtin.which_key.mappings['w'] = {
   w = { "<cmd>wincmd w<cr>", "Next" },
   W = { "<cmd>wincmd W<cr>", "Prev" },
   c = { "<cmd>wincmd c<cr>", "Close" },
+
   v = { "<cmd>wincmd v<cr>", "Vertical Split" },
+  h = { "<cmd>wincmd s<cr>", "Horizontal Split" },
+
+  n = { "<cmd>wincmd h<cr>", "To Left" },
+  e = { "<cmd>wincmd j<cr>", "To Down" },
+  i = { "<cmd>wincmd l<cr>", "To Right" },
+  u = { "<cmd>wincmd k<cr>", "To Up" },
+
+  N = { "<cmd>wincmd H<cr>", "Move To Left" },
+  E = { "<cmd>wincmd J<cr>", "Move To Down" },
+  I = { "<cmd>wincmd L<cr>", "Move To Right" },
+  U = { "<cmd>wincmd K<cr>", "Move To Up" },
+  T = { "<cmd>wincmd T<cr>", "Move To New Tab" },
+
+  r = { "<cmd>wincmd r<cr>", "Rotate Down Right" },
+  R = { "<cmd>wincmd R<cr>", "Rotate Up Left" },
+
 }
 
 -- TODO: User Config for predefined plugins
