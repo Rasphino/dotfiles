@@ -129,3 +129,59 @@ hs.fnutils.each({
 }, function(hotkey)
   Meh:bind(hotkey.mod, hotkey.key, hotkey.fn)
 end)
+
+
+-- TODO: refactor into spoon
+cmdIgnoreApp = {
+  { name = 'Finder', keep = true },
+  { name = 'Google Chrome' },
+  { name = 'Hammerspoon', keep = true },
+  { name = 'Telegram' }
+}
+
+function cmdHasIgnore(app)
+  for _, obj in ipairs(cmdIgnoreApp) do
+    if obj.name then
+      if app:name() == obj.name then
+        return true, obj
+      end
+    elseif obj.id then
+      if app:bundleID() == obj.id then
+        return true, obj
+      end
+    end
+  end
+  return false, nil
+end
+
+cmdQDelay = 0.8
+
+cmdQTimer = nil
+cmdQAlert = nil
+
+function cmdQCleanup()
+  hs.alert.closeSpecific(cmdQAlert)
+  cmdQTimer = nil
+  cmdQAlert = nil
+end
+
+function stopCmdQ()
+  if cmdQTimer then
+    cmdQTimer:stop()
+    cmdQCleanup()
+    hs.alert("Quit Canceled", 0.5)
+  end
+end
+
+function startCmdQ()
+  local app = hs.application.frontmostApplication()
+  local ignore, obj = cmdHasIgnore(app)
+  if ignore then
+    if obj.keep then return end
+    hs.eventtap.event.newKeyEvent({ "cmd" }, "q", false):post(app)
+  end
+  cmdQTimer = hs.timer.doAfter(cmdQDelay, function() app:kill(); cmdQCleanup() end)
+  cmdQAlert = hs.alert("Hold to Quit " .. app:name(), true)
+end
+
+cmdQ = hs.hotkey.bind({ "cmd" }, "q", startCmdQ, stopCmdQ)
