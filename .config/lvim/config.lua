@@ -25,6 +25,34 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
+-- ===== Basic Mappings =====
+-- undo key
+vim.api.nvim_set_keymap('', 'l', 'u', { noremap = true, silent = true })
+
+-- insert key
+vim.api.nvim_set_keymap('', 'k', 'i', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'K', 'I', { noremap = true, silent = true })
+
+-- find pair
+vim.api.nvim_set_keymap('', ',.', '%', { noremap = true, silent = true })
+
+-- ===== Cursor Movement =====
+vim.api.nvim_set_keymap('', 'u', 'k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'n', 'h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'e', 'j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'i', 'l', { noremap = true, silent = true })
+
+-- to start and end
+vim.api.nvim_set_keymap('', 'N', '0', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'I', '$', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'h', 'e', { noremap = true, silent = true })
+
+-- move view port without moving cursor
+vim.api.nvim_set_keymap('', '<C-u>', '5<C-y>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<C-e>', '5<C-e>', { noremap = true, silent = true })
+
+--
+
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
 -- local _, actions = pcall(require, "telescope.actions")
@@ -54,6 +82,13 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
 -- }
+lvim.builtin.which_key.mappings['w'] = {
+  name = "+Window",
+  w = { "<cmd>wincmd w<cr>", "Next" },
+  W = { "<cmd>wincmd W<cr>", "Prev" },
+  c = { "<cmd>wincmd c<cr>", "Close" },
+  v = { "<cmd>wincmd v<cr>", "Vertical Split" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
