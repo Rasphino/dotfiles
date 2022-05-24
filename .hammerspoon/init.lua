@@ -33,56 +33,6 @@ function yabai(args)
   end, args):start()
 end
 
--- function enterHyperMode()
---   hyper.triggered = false
---   hyper:enter()
--- end
-
--- function exitHyperMode()
---   hyper:exit()
---   if not hyper.triggered then
---     hs.eventtap.keyStroke({}, 'F18')
---   end
--- end
-
--- hs.hotkey.bind({}, 'F18', enterHyperMode, exitHyperMode)
-
--- hyper:bind({}, 'e', function()
---         hs.eventtap.keyStroke({}, 'down', 0)
---         hyper.triggered = true
---     end,
---     nil,
---     function()
---         hs.eventtap.keyStroke({}, 'down', 0)
---     end
--- )
-
--- hyper:bind({}, 'i', function()
---     hs.eventtap.keyStroke({}, 'up', 0)
---     hyper.triggered = true
--- end)
-
--- hyper:bind({}, 'n', function()
---     hs.eventtap.keyStroke({}, 'left', 0)
---     hyper.triggered = true
--- end)
-
--- hyper:bind({}, 'o', function()
---     hs.eventtap.keyStroke({}, 'right', 0)
---     hyper.triggered = true
--- end)
-
--- hyper:bind({}, "r", function()
---   hs.reload()
---   hyper.triggered = true
--- end)
-
-
--- hyper:bind({}, "m", function()
---   hs.window.frontmostWindow():minimize()
---   hyper.triggered = true
--- end)
-
 local fastKeyStroke = function(modifiers, character)
   local event = require("hs.eventtap").event
   event.newKeyEvent(modifiers, string.lower(character), true):post()
@@ -93,14 +43,14 @@ hs.fnutils.each({
   -- Movement
   { key = 'n', mod = {}, direction = 'left' },
   { key = 'e', mod = {}, direction = 'down' },
-  { key = 'i', mod = {}, direction = 'up' },
-  { key = 'o', mod = {}, direction = 'right' },
+  { key = 'u', mod = {}, direction = 'up' },
+  { key = 'i', mod = {}, direction = 'right' },
   { key = 'n', mod = { 'option' }, direction = 'left' },
   { key = 'e', mod = { 'option' }, direction = 'down' },
-  { key = 'i', mod = { 'option' }, direction = 'up' },
-  { key = 'o', mod = { 'option' }, direction = 'right' },
+  { key = 'u', mod = { 'option' }, direction = 'up' },
+  { key = 'i', mod = { 'option' }, direction = 'right' },
   { key = 'n', mod = { 'cmd' }, direction = 'left' }, -- beginning of line
-  { key = 'o', mod = { 'cmd' }, direction = 'right' }, -- end of line
+  { key = 'i', mod = { 'cmd' }, direction = 'right' }, -- end of line
 }, function(hotkey)
   Hyper:bind(hotkey.mod, hotkey.key,
     function()
