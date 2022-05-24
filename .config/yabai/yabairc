@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+# autoload 
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+yabai -m config layout bsp
+yabai -m config window_topmost off
+
+
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="QQ" manage=off
+yabai -m rule --add app="WeChat" manage=off
+yabai -m rule --add app="Telegram" manage=off
+yabai -m rule --add app="Preview" manage=off
+yabai -m rule --add app="Firefox" title="(Picture-in-Picture|画中画)" manage=off sticky=on opacity=1.0 
+yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
+yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="System Information" title="About This Mac" manage=off
+
+
+# gap
+yabai -m config top_padding    10
+yabai -m config bottom_padding 10
+yabai -m config left_padding   10
+yabai -m config right_padding  10
+yabai -m config window_gap     10
+
+
+# border
+yabai -m config window_border                on
+yabai -m config window_border_width          6
+yabai -m config active_window_border_color   0xff90ee90
+yabai -m config normal_window_border_color   0xff555555
+
+
+# mouse
+# set mouse interaction modifier key (default: fn)
+yabai -m config mouse_modifier fn
+
+# set modifier + left-click drag to move window (default: move)
+yabai -m config mouse_action1 move
+
+# set modifier + right-click drag to resize window (default: resize)
+yabai -m config mouse_action2 resize
+
+
+# opacity
+yabai -m config window_opacity off
+yabai -m config active_window_opacity 0.95
+yabai -m config normal_window_opacity 0.9
+
