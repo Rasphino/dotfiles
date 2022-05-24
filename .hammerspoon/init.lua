@@ -1,3 +1,5 @@
+logger = hs.logger.new("init", "verbose")
+
 hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "R", function()
   hs.reload()
 end)
@@ -21,8 +23,24 @@ Hyper:bind({}, 'r', function()
 end)
 
 Hyper:bind({}, 't', function()
-  hs.alert.show("Launching Alacritty")
-  os.execute("open -nF /Applications/Alacritty.app")
+  app = App.frontmostApplication()
+  if app:name() == 'Finder' then
+    script = [[
+    tell application "Finder"
+      return POSIX path of (insertion location as alias)
+    end tell
+    ]]
+    ok, output, _ = hs.osascript.applescript(script)
+    logger.i(ok, output)
+
+    if ok then
+      hs.alert.show("Launching Alacritty with " .. output)
+      os.execute("open -nF /Applications/Alacritty.app --args --working-directory " .. output)
+    end
+  else
+    hs.alert.show("Launching Alacritty")
+    os.execute("open -nF /Applications/Alacritty.app")
+  end
 end)
 
 
@@ -77,13 +95,13 @@ hs.fnutils.each({
   -- Yabai Focus Movement
   { key = 'n', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "west" }) end },
   { key = 'e', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "south" }) end },
-  { key = 'i', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "north" }) end },
-  { key = 'o', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "east" }) end },
+  { key = 'u', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "north" }) end },
+  { key = 'i', mod = { "command" }, fn = function() yabai({ "-m", "window", "--swap", "east" }) end },
 
   { key = 'n', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "west" }) end },
   { key = 'e', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "south" }) end },
-  { key = 'i', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "north" }) end },
-  { key = 'o', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "east" }) end },
+  { key = 'u', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "north" }) end },
+  { key = 'i', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "east" }) end },
   { key = "return", mod = {}, fn = function() yabai({ "-m", "window", "--focus", "mouse" }) end },
 
   { key = "space", mod = {}, fn = function() yabai({ "-m", "window", "--toggle", "float" }) end },
