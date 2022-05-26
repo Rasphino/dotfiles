@@ -858,6 +858,7 @@ key_bindings:
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
+  - { key: I,        mods: Control, chars:  "\x0e\x69" }
   - { key: Back,           mods: Command,                    chars: "\x15" }
   - { key: Left,  mods: Option,  chars: "\x1b[1;5D" }
   - { key: Right,  mods: Option, chars: "\x1b[1;5C" }
