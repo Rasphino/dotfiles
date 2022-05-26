@@ -13,6 +13,7 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "onedarker"
 lvim.transparent_window = false
+vim.o.guifont = "Iosevka Nerd Font Mono"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -27,7 +28,16 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- ===== Basic Mappings =====
 -- undo key
-vim.api.nvim_set_keymap('', 'l', 'u', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('', 'l', 'u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'j', 'n', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'J', 'N', { noremap = true, silent = true })
+
+-- easier command
+vim.api.nvim_set_keymap('', ';', ':', { noremap = true, silent = true })
+
+-- insert below/next line
+vim.api.nvim_set_keymap('', 'l', 'o', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'L', 'O', { noremap = true, silent = true })
 
 -- insert key
 vim.api.nvim_set_keymap('', 'k', 'i', { noremap = true, silent = true })
@@ -37,18 +47,18 @@ vim.api.nvim_set_keymap('', 'K', 'I', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', ',.', '%', { noremap = true, silent = true })
 
 -- ===== Cursor Movement =====
-vim.api.nvim_set_keymap('', 'u', 'k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', 'n', 'h', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', 'e', 'j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', 'i', 'l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'i', 'k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'o', 'l', { noremap = true, silent = true })
 
 -- to start and end
 vim.api.nvim_set_keymap('', 'N', '0', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('', 'I', '$', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', 'O', '$', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', 'h', 'e', { noremap = true, silent = true })
 
 -- move view port without moving cursor
-vim.api.nvim_set_keymap('', '<C-u>', '5<C-y>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<C-n>i', '5<C-y>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('', '<C-e>', '5<C-e>', { noremap = true, silent = true })
 
 --
@@ -104,8 +114,11 @@ lvim.builtin.which_key.mappings['w'] = {
 
   r = { "<cmd>wincmd r<cr>", "Rotate Down Right" },
   R = { "<cmd>wincmd R<cr>", "Rotate Up Left" },
-
 }
+
+-- lvim.builtin.which_key.mappings['n'] = {
+--   "<cmd>tabnew<cr>", "New Tab"
+-- }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
