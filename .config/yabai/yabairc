@@ -19,6 +19,7 @@ yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=
 yabai -m rule --add app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="System Information" title="About This Mac" manage=off
+yabai -m rule --add app="CleanShot X" manage=off border=off
 
 
 # gap
@@ -54,4 +55,4 @@ yabai -m config normal_window_opacity 0.9
 
 # spacebar integration
 SPACEBAR_HEIGHT=$(spacebar -m config height)
-yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
+yabai -m config external_bar all:$SPACEBAR_HEIGHT
