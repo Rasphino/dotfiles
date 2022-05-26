@@ -13,13 +13,13 @@ yabai -m rule --add app="QQ" manage=off
 yabai -m rule --add app="WeChat" manage=off
 yabai -m rule --add app="Telegram" manage=off
 yabai -m rule --add app="Preview" manage=off
-yabai -m rule --add app="Firefox" title="(Picture-in-Picture|画中画)" manage=off sticky=on opacity=1.0 
+yabai -m rule --add app="Firefox" title="(Picture-in-Picture|画中画)" manage=off sticky=on opacity=1.0 border=off
 yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
 yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="System Information" title="About This Mac" manage=off
-yabai -m rule --add app="CleanShot X" manage=off border=off
+yabai -m rule --add app="CleanShot X" manage=off opacity=1.0 border=off 
 
 
 # gap
