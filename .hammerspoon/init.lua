@@ -114,6 +114,8 @@ hs.fnutils.each({
   { key = '5', mod = {}, fn = function() yabai({ "-m", "space", "--focus", "5" }) end },
   { key = '6', mod = {}, fn = function() yabai({ "-m", "space", "--focus", "6" }) end },
   { key = '7', mod = {}, fn = function() yabai({ "-m", "space", "--focus", "7" }) end },
+  { key = '8', mod = {}, fn = function() yabai({ "-m", "space", "--focus", "8" }) end },
+  { key = '9', mod = {}, fn = function() yabai({ "-m", "space", "--focus", "9" }) end },
 
   -- move window to space
   { key = '1', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "1" }) end },
@@ -123,20 +125,47 @@ hs.fnutils.each({
   { key = '5', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "5" }) end },
   { key = '6', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "6" }) end },
   { key = '7', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "7" }) end },
+  { key = '8', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "8" }) end },
+  { key = '9', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--space", "9" }) end },
 
   -- space creation/deletion
   { key = "return", mod = { "shift" }, fn = function()
+    -- create space, move window and follow focus
     local script = [[
-/opt/homebrew/bin/yabai -m space --create && \
-                index="$(/opt/homebrew/bin/yabai -m query --spaces --display | /opt/homebrew/bin/jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
-                /opt/homebrew/bin/yabai -m space --focus "${index}"
+      /opt/homebrew/bin/yabai -m space --create && \
+      index="$(/opt/homebrew/bin/yabai -m query --spaces --display | /opt/homebrew/bin/jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+      /opt/homebrew/bin/yabai -m window --space "${index}" && \
+      /opt/homebrew/bin/yabai -m space --focus "${index}"
 ]]
     hs.task.new("/bin/bash", nil, function(t, ...)
       print("stream", hs.inspect(table.pack(...)))
       return true
     end, { "-l", "-c", script }):start()
   end },
-  { key = "delete", mod = { "shift" }, fn = function() yabai({ "-m", "space", "--destroy" }) end },
+  { key = "return", mod = {}, fn = function()
+    -- create space in background
+    local script = [[
+      /opt/homebrew/bin/yabai -m space --create && \
+      /opt/homebrew/bin/spacebar -m config spaces on
+]]
+    hs.task.new("/bin/bash", nil, function(t, ...)
+      print("stream", hs.inspect(table.pack(...)))
+      return true
+    end, { "-l", "-c", script }):start()
+  end },
+  { key = "delete", mod = { "shift" }, fn = function()
+    -- delete space, if the space is empty
+    local script = [[
+      cnt=$(/opt/homebrew/bin/yabai -m query --windows --space | /opt/homebrew/bin/jq length) && \
+      if [ $cnt -eq 0 ]; then
+        /opt/homebrew/bin/yabai -m space --destroy
+      fi
+]]
+    hs.task.new("/bin/bash", nil, function(t, ...)
+      print("stream", hs.inspect(table.pack(...)))
+      return true
+    end, { "-l", "-c", script }):start()
+  end },
 
 }, function(hotkey)
   Hyper:bind(hotkey.mod, hotkey.key, hotkey.fn)
