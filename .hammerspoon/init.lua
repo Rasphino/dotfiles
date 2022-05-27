@@ -89,13 +89,26 @@ hs.fnutils.each({
   { key = 'e', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "south" }) end },
   { key = 'i', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "north" }) end },
   { key = 'o', mod = {}, fn = function() yabai({ "-m", "window", "--focus", "east" }) end },
+  { key = ',', mod = {}, fn = function()
+    hs.task.new("/bin/bash", nil, function(t, ...)
+      print("stream", hs.inspect(table.pack(...)))
+      return true
+    end, { "-l", "-c", "/opt/homebrew/bin/yabai -m window --focus stack.prev || /opt/homebrew/bin/yabai -m window --focus stack.last" }):start()
+  end },
+  { key = '.', mod = {}, fn = function()
+    hs.task.new("/bin/bash", nil, function(t, ...)
+      print("stream", hs.inspect(table.pack(...)))
+      return true
+    end, { "-l", "-c", "/opt/homebrew/bin/yabai -m window --focus stack.next || /opt/homebrew/bin/yabai -m window --focus stack.first" }):start()
+  end },
+  { key = "return", mod = {}, fn = function() yabai({ "-m", "window", "--focus", "mouse" }) end },
 
   -- swap window
   { key = 'n', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--swap", "west" }) end },
   { key = 'e', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--swap", "south" }) end },
   { key = 'i', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--swap", "north" }) end },
   { key = 'o', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--swap", "east" }) end },
-  { key = "return", mod = {}, fn = function() yabai({ "-m", "window", "--focus", "mouse" }) end },
+  { key = 's', mod = { "shift" }, fn = function() yabai({ "-m", "window", "--stack", "last" }) end },
 
   -- rotate window tree
   { key = 'r', mod = {}, fn = function() yabai({ "-m", "space", "--rotate", "90" }) end },
@@ -245,3 +258,8 @@ function startCmdQ()
 end
 
 cmdQ = hs.hotkey.bind({ "cmd" }, "q", startCmdQ, stopCmdQ)
+
+
+
+stackline = require "stackline"
+stackline:init()
