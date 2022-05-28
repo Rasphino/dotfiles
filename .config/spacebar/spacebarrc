@@ -24,12 +24,12 @@ spacebar -m config space_icon                  •
 spacebar -m config space_icon_color            0xffffab91
 spacebar -m config space_icon_color_secondary  0xff78c4d4
 spacebar -m config space_icon_color_tertiary   0xfffff9b0
-spacebar -m config space_icon_strip                 6 7 8 9 10
+spacebar -m config space_icon_strip                  7 8 9 10
 spacebar -m config spaces_for_all_displays     on
 spacebar -m config clock_icon                  
 spacebar -m config dnd_icon                    
 spacebar -m config clock_format                "%d/%m/%y %R"
-spacebar -m config right_shell                 on
+# spacebar -m config right_shell                 on
 spacebar -m config right_shell_icon            
 spacebar -m config right_shell_command         "whoami"
 

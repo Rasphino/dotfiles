@@ -12,11 +12,12 @@ yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="Preview" manage=off
 yabai -m rule --add app="Firefox" title="(Picture-in-Picture|画中画)" manage=off sticky=on opacity=1.0 border=off
 yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
-yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref|Bin)" manage=off
 yabai -m rule --add app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="System Information" title="About This Mac" manage=off
 yabai -m rule --add app="CleanShot X" manage=off opacity=1.0 border=off 
+yabai -m rule --add app="DevUtils" manage=off
 
 
 # gap
@@ -51,6 +52,7 @@ yabai -m space 2 --label code
 yabai -m space 3 --label notes
 yabai -m space 4 --label IM
 yabai -m space 5 --label media
+yabai -m space 6 --label GTD
 
 yabai -m config --space IM layout float
 yabai -m rule --add app="QQ" manage=off space=IM
@@ -58,6 +60,8 @@ yabai -m rule --add app="WeChat" manage=off space=IM
 yabai -m rule --add app="Telegram" manage=off space=IM
 
 yabai -m rule --add app="音乐|Music" space=media
+
+yabai -m rule --add app="TickTick" space=GTD
 
 # opacity
 yabai -m config window_opacity off
