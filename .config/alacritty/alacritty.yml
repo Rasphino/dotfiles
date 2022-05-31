@@ -852,18 +852,19 @@ key_bindings:
   #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   #- { key: M,              mods: Command,                    action: Minimize              }
-  - { key: Q,              mods: Command,                    action: None }
-  - { key: W,              mods: Command,                    action: None }
+  - { key: Q,             mods: Command,                     action: None                   }
+  - { key: W,             mods: Command,                     action: None                   }
   #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
-  - { key: I,        mods: Control, chars:  "\x0e\x69" }
-  - { key: Back,           mods: Command,                    chars: "\x15" }
-  - { key: Left,  mods: Option,  chars: "\x1b[1;5D" }
-  - { key: Right,  mods: Option, chars: "\x1b[1;5C" }
-  - { key: Up, mods: Option, chars: "" }
-  - { key: Down, mods: Option, chars: "" }
+  - { key: I,             mods: Control,                    chars: "\x0e\x69"               }
+  - { key: Back,          mods: Command,                    chars: "\x15"                   }
+  - { key: Back,                                            action: ReceiveChar             }
+  - { key: Left,          mods: Option,                     chars: "\x1b[1;5D"              }
+  - { key: Right,         mods: Option,                     chars: "\x1b[1;5C"              }
+  - { key: Up,            mods: Option,                     chars: ""                       }
+  - { key: Down,          mods: Option,                     chars: ""                       }
 
 #debug:
   # Display the time it takes to redraw each frame.
