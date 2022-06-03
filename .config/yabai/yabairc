@@ -18,6 +18,8 @@ yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="System Information" title="About This Mac" manage=off
 yabai -m rule --add app="CleanShot X" manage=off opacity=1.0 border=off 
 yabai -m rule --add app="DevUtils" manage=off
+yabai -m rule --add app="Tencent Lemon" manage=off
+yabai -m rule --add app="Calendar" manage=off
 
 
 # gap
@@ -57,6 +59,7 @@ yabai -m space 6 --label GTD
 yabai -m config --space IM layout float
 yabai -m rule --add app="QQ" manage=off space=IM
 yabai -m rule --add app="WeChat" manage=off space=IM
+yabai -m rule --add app="WeChat" title="Call" manage=off sticky=on
 yabai -m rule --add app="Telegram" manage=off space=IM
 
 yabai -m rule --add app="音乐|Music" space=media
