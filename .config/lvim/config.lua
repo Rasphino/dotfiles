@@ -81,40 +81,60 @@ vim.api.nvim_set_keymap('', '<C-e>', '5<C-e>', { noremap = true, silent = true }
 --   },
 -- }
 
+lvim.builtin.which_key.mappings["s"] = {
+  name = "Search",
+  b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+  c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+  f = { "<cmd>Telescope find_files<cr>", "Find File" },
+  h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+  M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+  r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+  R = { "<cmd>Telescope registers<cr>", "Registers" },
+  s = { "<cmd>Telescope grep_string<cr>", "Grep String" },
+  t = { "<cmd>Telescope live_grep<cr>", "Text" },
+  k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+  C = { "<cmd>Telescope commands<cr>", "Commands" },
+  p = {
+    "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+    "Colorscheme with Preview",
+  },
+}
+
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
--- }
-lvim.builtin.which_key.mappings['w'] = {
-  name = "+Window",
-  w = { "<cmd>wincmd w<cr>", "Next" },
-  W = { "<cmd>wincmd W<cr>", "Prev" },
-  c = { "<cmd>wincmd c<cr>", "Close" },
-
-  v = { "<cmd>wincmd v<cr>", "Vertical Split" },
-  h = { "<cmd>wincmd s<cr>", "Horizontal Split" },
-
-  n = { "<cmd>wincmd h<cr>", "To Left" },
-  e = { "<cmd>wincmd j<cr>", "To Down" },
-  i = { "<cmd>wincmd l<cr>", "To Right" },
-  u = { "<cmd>wincmd k<cr>", "To Up" },
-
-  N = { "<cmd>wincmd H<cr>", "Move To Left" },
-  E = { "<cmd>wincmd J<cr>", "Move To Down" },
-  I = { "<cmd>wincmd L<cr>", "Move To Right" },
-  U = { "<cmd>wincmd K<cr>", "Move To Up" },
-  T = { "<cmd>wincmd T<cr>", "Move To New Tab" },
-
-  r = { "<cmd>wincmd r<cr>", "Rotate Down Right" },
-  R = { "<cmd>wincmd R<cr>", "Rotate Up Left" },
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
 }
+
+-- lvim.builtin.which_key.mappings['w'] = {
+--   name = "+Window",
+--   w = { "<cmd>wincmd w<cr>", "Next" },
+--   W = { "<cmd>wincmd W<cr>", "Prev" },
+--   c = { "<cmd>wincmd c<cr>", "Close" },
+
+--   v = { "<cmd>wincmd v<cr>", "Vertical Split" },
+--   h = { "<cmd>wincmd s<cr>", "Horizontal Split" },
+
+--   n = { "<cmd>wincmd h<cr>", "To Left" },
+--   e = { "<cmd>wincmd j<cr>", "To Down" },
+--   i = { "<cmd>wincmd l<cr>", "To Right" },
+--   u = { "<cmd>wincmd k<cr>", "To Up" },
+
+--   N = { "<cmd>wincmd H<cr>", "Move To Left" },
+--   E = { "<cmd>wincmd J<cr>", "Move To Down" },
+--   I = { "<cmd>wincmd L<cr>", "Move To Right" },
+--   U = { "<cmd>wincmd K<cr>", "Move To Up" },
+--   T = { "<cmd>wincmd T<cr>", "Move To New Tab" },
+
+--   r = { "<cmd>wincmd r<cr>", "Rotate Down Right" },
+--   R = { "<cmd>wincmd R<cr>", "Rotate Up Left" },
+-- }
 
 -- lvim.builtin.which_key.mappings['n'] = {
 --   "<cmd>tabnew<cr>", "New Tab"
@@ -147,6 +167,26 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+lvim.builtin.autopairs.enable_check_bracket_line = true
+vim.api.nvim_set_keymap('', 'e', "<cmd>lua require('nvim-autopairs.fastwrap').show()<cr>", { noremap = true, silent = true })
+
+lvim.builtin.which_key.setup.plugins = {
+  marks = true, -- shows a list of your marks on ' and `
+  registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+  -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+  -- No actual key bindings are created
+  presets = {
+    operators = false, -- adds help for operators like d, y, ...
+    motions = false, -- adds help for motions
+    text_objects = false, -- help for text objects triggered after entering an operator
+    windows = true, -- default bindings on <c-w>
+    nav = true, -- misc bindings to work with windows
+    z = true, -- bindings for folds, spelling and others prefixed with z
+    g = true, -- bindings for prefixed with g
+  },
+  spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
+}
 
 -- generic LSP settings
 
@@ -210,13 +250,15 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
---     {"folke/tokyonight.nvim"},
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
+lvim.plugins = {
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {
+    "/Users/rasp/repo/nvim-plugins/globals.nvim"
+  }
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
